@@ -3,8 +3,9 @@ import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	NodeConnectionType,
+	NodeOperationError,
 } from 'n8n-workflow';
-import { NodeOperationError } from 'n8n-workflow';
 import { WikiMarkupTransformer } from '@atlaskit/editor-wikimarkup-transformer';
 import { MarkdownTransformer } from '@atlaskit/editor-markdown-transformer';
 import { JSONDocNode, JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -20,8 +21,8 @@ export class AtlassianDocumentFormatter implements INodeType {
 		defaults: {
 			name: 'ADF',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionType.Main],
+		outputs: [NodeConnectionType.Main],
 		properties: [
 			{
 				displayName: 'Mode',

@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-atlassian-document",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Converts Markdown, and Jira and Confluence Wiki Markup to and from Atlassian Document Format (ADF)",
   "keywords": [
     "n8n-community-node-package",
@@ -52,12 +52,12 @@
     "@atlaskit/editor-wikimarkup-transformer": "^11.15.1"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^7.15.0",
+    "@typescript-eslint/parser": "^8.27.0",
     "eslint": "^8.56.0",
-    "eslint-plugin-n8n-nodes-base": "^1.16.1",
-    "gulp": "^4.0.2",
-    "prettier": "^3.3.2",
-    "typescript": "^5.5.3"
+    "eslint-plugin-n8n-nodes-base": "^1.16.3",
+    "gulp": "^5.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
