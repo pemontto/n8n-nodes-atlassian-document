@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-atlassian-document",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Converts Markdown, and Jira and Confluence Wiki Markup to and from Atlassian Document Format (ADF)",
   "keywords": [
     "n8n-community-node-package",
