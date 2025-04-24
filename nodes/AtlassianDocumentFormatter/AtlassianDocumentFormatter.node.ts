@@ -57,7 +57,7 @@ export class AtlassianDocumentFormatter implements INodeType {
 				displayName: 'Input Data',
 				name: 'input',
 				type: 'json',
-				default: {},
+				default: '',
 				required: true,
 				description: 'The data to be converted to ADF or from ADF',
 			},
@@ -70,6 +70,14 @@ export class AtlassianDocumentFormatter implements INodeType {
 				placeholder: '',
 				description: 'The field to put the output in',
 			},
+			{
+				displayName: 'Include Other Input Fields',
+				name: 'includeOtherFields',
+				type: 'boolean',
+				default: true,
+				description:
+					"Whether to pass to the output all the input fields (along with the fields set in 'Fields to Set')",
+			},
 		],
 	};
 
@@ -81,6 +89,7 @@ export class AtlassianDocumentFormatter implements INodeType {
 		const mode = this.getNodeParameter('mode', 0) as string;
 
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
+			const includeOtherFields = this.getNodeParameter('includeOtherFields', itemIndex, true) as boolean;
 			try {
 				const destinationKey = this.getNodeParameter('destinationKey', itemIndex) as string;
 				let transformer;
@@ -104,6 +113,10 @@ export class AtlassianDocumentFormatter implements INodeType {
 					out = JSON.stringify(out);
 				}
 				if (mode === 'wikiMarkupToADF') {
+					if (typeof input !== 'string') {
+						// Throw error stating input is not a string
+						throw new NodeOperationError(this.getNode(), 'Input Data must be a Wiki Markup string')
+					}
 					transformer = new WikiMarkupTransformer();
 					out = transformer.parse(input as string).toJSON();
 					out = JSON.stringify(out);
@@ -116,10 +129,17 @@ export class AtlassianDocumentFormatter implements INodeType {
 				// 	{ itemData: { item: itemIndex } },
 				// );
 				// returnData = returnData.concat(executionData);
-				returnData = returnData.concat({
-					json: { ...items[itemIndex].json, [destinationKey]: out },
-					pairedItem: itemIndex,
-				});
+				if (includeOtherFields) {
+					returnData = returnData.concat({
+						json: { ...items[itemIndex].json, [destinationKey]: out },
+						pairedItem: itemIndex,
+					});
+				} else {
+					returnData = returnData.concat({
+						json: { [destinationKey]: out },
+						pairedItem: itemIndex,
+					});
+				}
 			} catch (error) {
 				// This node should never fail but we want to showcase how
 				// to handle errors.
