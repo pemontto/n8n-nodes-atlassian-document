@@ -10,6 +10,39 @@ import { WikiMarkupTransformer } from '@atlaskit/editor-wikimarkup-transformer';
 import { MarkdownTransformer } from '@atlaskit/editor-markdown-transformer';
 import { JSONDocNode, JSONTransformer } from '@atlaskit/editor-json-transformer';
 
+// Helper function to recursively remove 'localId' from 'attrs'
+// and remove the 'attrs' key entirely if it becomes empty.
+function removeLocalIds(node: any): any {
+	if (Array.isArray(node)) {
+		return node.map(removeLocalIds);
+	}
+
+	if (node !== null && typeof node === 'object') {
+		const newNode: any = {};
+		for (const key in node) {
+			if (key === 'attrs' && node[key] && typeof node[key] === 'object') {
+				// Clone attrs object
+				const newAttrs: any = { ...node[key] };
+				// Delete localId if it exists
+				if ('localId' in newAttrs) {
+					delete newAttrs.localId;
+				}
+				// Only add the 'attrs' key back if it still contains other properties
+				if (Object.keys(newAttrs).length > 0) {
+					newNode[key] = newAttrs;
+				}
+				// Otherwise, omit the 'attrs' key entirely
+			} else {
+				// Recursively process other properties/nested nodes
+				newNode[key] = removeLocalIds(node[key]);
+			}
+		}
+		return newNode;
+	}
+
+	return node; // Return primitives directly
+}
+
 export class AtlassianDocumentFormatter implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Atlassian Document Formatter',
@@ -109,8 +142,10 @@ export class AtlassianDocumentFormatter implements INodeType {
 				}
 				if (mode === 'markdownToADF') {
 					transformer = new MarkdownTransformer();
-					out = transformer.parse(input as string).toJSON();
-					out = JSON.stringify(out);
+					let adf = transformer.parse(input as string).toJSON();
+					adf = removeLocalIds(adf);
+					adf = {version: 1, ...adf};
+					out = JSON.stringify(adf);
 				}
 				if (mode === 'wikiMarkupToADF') {
 					if (typeof input !== 'string') {
@@ -118,8 +153,10 @@ export class AtlassianDocumentFormatter implements INodeType {
 						throw new NodeOperationError(this.getNode(), 'Input Data must be a Wiki Markup string')
 					}
 					transformer = new WikiMarkupTransformer();
-					out = transformer.parse(input as string).toJSON();
-					out = JSON.stringify(out);
+					let adf = transformer.parse(input as string).toJSON();
+					adf = removeLocalIds(adf);
+					adf = {version: 1, ...adf};
+					out = JSON.stringify(adf);
 				}
 				// const executionData = this.helpers.constructExecutionMetaData(
 				// 	this.helpers.returnJsonArray({
