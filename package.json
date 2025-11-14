@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-atlassian-document",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "n8n community node for converting between Atlassian Document Format (ADF), Wiki Markup, and Markdown",
   "license": "MIT",
   "homepage": "",
@@ -31,7 +31,9 @@
     "release": "n8n-node release",
     "prepublishOnly": "n8n-node prerelease"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "n8n": {
     "n8nNodesApiVersion": 1,
     "strict": false,
@@ -52,6 +54,8 @@
     "@atlaskit/editor-markdown-transformer": "^5.20.2",
     "@atlaskit/editor-wikimarkup-transformer": "^11.20.2"
   },
-  "peerDependencies": { "n8n-workflow": "*" },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
   "packageManager": "pnpm@10.22.0"
 }
