@@ -8,3 +8,16 @@ yarn.lock
 pnpm-lock.yaml
 package-lock.json
 .vscode/launch.json
+
+### Typescript ###
+node_modules/
+dist/
+
+### Pnpm ###
+pnpm-lock.yaml
+.pnpm/
+.pnpm-debug.log
+.pnpm-store/
+pnpm-lock.yaml.bak
+.pnpmfile.cjs
+.pnpm-cache/

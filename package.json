@@ -1,68 +1,57 @@
 {
   "name": "n8n-nodes-atlassian-document",
   "version": "0.1.4",
-  "description": "Converts Markdown, and Jira and Confluence Wiki Markup to and from Atlassian Document Format (ADF)",
+  "description": "n8n community node for converting between Atlassian Document Format (ADF), Wiki Markup, and Markdown",
+  "license": "MIT",
+  "homepage": "",
   "keywords": [
     "n8n-community-node-package",
     "atlassian",
+    "adf",
+    "document-format",
     "jira",
     "confluence",
-    "markdown",
-    "wiki",
-    "adf",
-    "parser"
+    "wiki-markup",
+    "markdown"
   ],
-  "license": "MIT",
-  "homepage": "https://github.com/pemontto/n8n-nodes-atlassian-document",
   "author": {
-    "name": "pemontto"
+    "name": "pemontto",
+    "email": "pemontto@gmail.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/pemontto/n8n-nodes-atlassian-document.git"
   },
-  "engines": {
-    "node": ">=18.10",
-    "pnpm": ">=9.1"
-  },
-  "packageManager": "pnpm@9.1.4",
-  "main": "index.js",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "build": "tsc && gulp build:icons",
-    "dev": "tsc --watch",
-    "format": "prettier nodes --write",
-    "lint": "eslint nodes package.json",
-    "lintfix": "eslint nodes package.json --fix",
-    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes package.json"
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "release": "n8n-node release",
+    "prepublishOnly": "n8n-node prerelease"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "n8n": {
     "n8nNodesApiVersion": 1,
+    "strict": false,
     "credentials": [],
     "nodes": [
       "dist/nodes/AtlassianDocumentFormatter/AtlassianDocumentFormatter.node.js"
     ]
   },
-  "dependencies": {
-    "@atlaskit/editor-json-transformer": "^8.24.0",
-    "@atlaskit/editor-markdown-transformer": "^5.16.0",
-    "@atlaskit/editor-wikimarkup-transformer": "^11.15.1"
-  },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.27.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-n8n-nodes-base": "^1.16.3",
-    "gulp": "^5.0.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "@n8n/node-cli": "*",
+    "eslint": "9.39.1",
+    "prettier": "3.6.2",
+    "release-it": "^19.0.6",
+    "typescript": "5.9.3"
   },
-  "peerDependencies": {
-    "n8n-workflow": "*"
+  "dependencies": {
+    "@atlaskit/editor-json-transformer": "^8.31.2",
+    "@atlaskit/editor-markdown-transformer": "^5.20.2",
+    "@atlaskit/editor-wikimarkup-transformer": "^11.20.2"
   },
-  "bugs": {
-    "url": "https://github.com/pemontto/n8n-nodes-atlassian-document/issues"
-  }
+  "peerDependencies": { "n8n-workflow": "*" },
+  "packageManager": "pnpm@10.22.0"
 }
