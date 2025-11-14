@@ -10,7 +10,14 @@ export const loadOptionsFunctions = {};
 export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 	const items = this.getInputData();
 	const returnData: INodeExecutionData[] = [];
-	const operation = this.getNodeParameter('operation', 0) as string;
+	// Backwards compatibility: support both 'operation' (new) and 'mode' (old) parameter names
+	let operation: string;
+	try {
+		operation = this.getNodeParameter('operation', 0) as string;
+	} catch {
+		// Fall back to old 'mode' parameter for backwards compatibility
+		operation = this.getNodeParameter('mode', 0) as string;
+	}
 
 	for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
 		const includeOtherFields = this.getNodeParameter(
