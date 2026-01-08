@@ -1,6 +1,6 @@
-# n8n-nodes-atlassian-document
+<img src="https://raw.githubusercontent.com/pemontto/n8n-nodes-atlassian-document/master/icons/atlassian.svg" width="120" alt="Atlassian Logo" />
 
-![Atlassian Logo](icons/atlassian.svg)
+# n8n-nodes-atlassian-document
 
 This is an n8n community node. It lets you convert between Atlassian Document Format (ADF), Wiki Markup, and Markdown in your n8n workflows.
 
