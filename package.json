@@ -52,7 +52,7 @@
   "dependencies": {
     "@atlaskit/editor-json-transformer": "^8.31.2",
     "@atlaskit/editor-markdown-transformer": "^5.20.2",
-    "@atlaskit/editor-wikimarkup-transformer": "^11.20.2"
+    "@atlaskit/editor-wikimarkup-transformer": "^12.0.0"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
