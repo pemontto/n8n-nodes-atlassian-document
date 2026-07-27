@@ -50,7 +50,7 @@
     "typescript": "5.9.3"
   },
   "dependencies": {
-    "@atlaskit/editor-json-transformer": "^8.31.2",
+    "@atlaskit/editor-json-transformer": "^9.1.0",
     "@atlaskit/editor-markdown-transformer": "^5.20.2",
     "@atlaskit/editor-wikimarkup-transformer": "^11.20.2"
   },
